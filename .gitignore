@@ -158,4 +158,9 @@ InitTestScene*.unity
 
 # Built project files
 Bin/
+
+# Local rider modules
 .idea/.idea.LD48/riderModule.iml
+
+# Scenes for local testing
+Assets/Scenes/local_*
