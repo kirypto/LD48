@@ -19,8 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void LookAtMouse() {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(
-            new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint((Vector2) Input.mousePosition);
 
         Vector2 vectorToMouse = ((Vector2) (mousePosition - transform.position)).normalized;
         transform.right = vectorToMouse;
