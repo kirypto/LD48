@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Projectile
+  - Mirror
   layers:
   - Default
   - TransparentFX
@@ -13,16 +16,16 @@ TagManager:
   - UI
   - 
   - 
+  - Environment
   - 
   - 
+  - Enemy
+  - Mirror
+  - 
+  - Player
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Projectiles
   - 
   - 
   - 
@@ -40,4 +43,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 824441149
+    locked: 0
+  - name: Environment
+    uniqueID: 3969008459
+    locked: 0
+  - name: Enemy
+    uniqueID: 470924397
+    locked: 0
+  - name: Player
+    uniqueID: 2310600117
+    locked: 0
+  - name: Projectile
+    uniqueID: 2869711209
+    locked: 0
+  - name: UI
+    uniqueID: 1995475287
     locked: 0
