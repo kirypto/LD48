@@ -23,4 +23,23 @@ public class ProjectileScript : MonoBehaviour
     {
         _speed = speed;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Wall":
+                Destroy(gameObject);
+                break;
+            case "Player":
+                Debug.LogError("Projectile interaction with Player is not yet implemented");
+                break;
+            case "Enemy":
+                Debug.LogError("Projectile interaction with Enemy is not yet implemented");
+                break;
+            default:
+                Debug.LogWarning($"Projectile interaction triggered with unhandled object, tag was: {other.gameObject.tag}");
+                break;
+        }
+    }
 }
