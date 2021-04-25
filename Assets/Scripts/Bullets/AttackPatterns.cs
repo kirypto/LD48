@@ -36,6 +36,16 @@ namespace Bullets
                                 {
                                         new ProjectileAttack(new Vector2(0f, 1f), ProjectileType.Normal),
                                         new ProjectileAttack(new Vector2(0f, -1f), ProjectileType.Normal),
+                                }, .7f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                        new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal),
+                                        new ProjectileAttack(new Vector2(-1f, 0f), ProjectileType.Normal),
+                                }, .7f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                        new ProjectileAttack(new Vector2(0f, 1f), ProjectileType.Normal),
+                                        new ProjectileAttack(new Vector2(0f, -1f), ProjectileType.Normal),
                                 }, 4f),
                         }
                 },
@@ -53,44 +63,60 @@ namespace Bullets
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
                                 }, 0.05f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam)
-                                }, 13.2f),
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
+                                }, 0.05f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
+                                }, 0.05f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
+                                }, 0.05f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
+                                }, 0.05f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(Vector2.zero, ProjectileType.WazerBeam, false)
+                                }, 7.2f),
                         }
                 },
 
@@ -114,11 +140,13 @@ namespace Bullets
     {
         public Vector2 Trajectory { get; }
         public ProjectileType Type { get; }
+        public bool PlayAudio { get; }
 
-        public ProjectileAttack(Vector2 trajectory, ProjectileType type)
+        public ProjectileAttack(Vector2 trajectory, ProjectileType type, bool playAudio = true)
         {
             Trajectory = trajectory;
             Type = type;
+            PlayAudio = playAudio;
         }
     }
 }

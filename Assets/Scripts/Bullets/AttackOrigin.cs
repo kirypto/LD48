@@ -76,7 +76,7 @@ namespace Bullets
                     GameObject projectile = Instantiate(prefab, _transform.position, LookRotation2D(trajectory), _bulletContainer);
                     ProjectileScript projectileScript = projectile.GetComponent<ProjectileScript>();
 
-                    projectileScript.Initialize();
+                    projectileScript.Initialize(playSpawnSound: attack.PlayAudio);
                 }
 
                 _currentSteps[pattern]++;
