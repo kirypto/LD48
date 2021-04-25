@@ -3,22 +3,29 @@ using Health;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileScript : MonoBehaviour
 {
     [SerializeField] private float initialFiringForce = 1f;
     [SerializeField] private float collisionDelay = 1f;
     [SerializeField] private float damage = 1f;
-    [SerializeField] private AudioClip spawnSound;
+    [SerializeField] private AudioClip soundSpan;
+    [SerializeField] private AudioClip soundDamage;
+    [SerializeField] private AudioClip soundWall;
+    [SerializeField] private AudioClip soundReflection;
 
     private Rigidbody2D _rigidbody2D;
+    private AudioSource _audioSource;
     private Transform _transform;
     private float _speed = 1f;
     private bool _isDisabled = true;
     private bool _launched;
+    private bool _playSpawnSound = true;
 
     private Vector2 LaunchVector => _transform.right * _speed * initialFiringForce;
 
-    public void Initialize(float? speed = null, float? collisionDelaySeconds = null, float? projectileDamage = null)
+    public void Initialize(
+            float? speed = null, float? collisionDelaySeconds = null, float? projectileDamage = null, bool playSpawnSound = true)
     {
         if (_launched)
         {
@@ -39,11 +46,14 @@ public class ProjectileScript : MonoBehaviour
         {
             damage = projectileDamage.Value;
         }
+
+        _playSpawnSound = playSpawnSound;
     }
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
         _transform = transform;
     }
 
@@ -52,6 +62,10 @@ public class ProjectileScript : MonoBehaviour
         _launched = true;
         _rigidbody2D.AddForce(LaunchVector);
         DelayCollisions();
+        if (_playSpawnSound)
+        {
+            _audioSource.PlayOneShot(soundSpan);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -86,6 +100,7 @@ public class ProjectileScript : MonoBehaviour
                     _rigidbody2D.AddForce(LaunchVector);
                     DelayCollisions();
                 }
+
                 break;
             default:
                 Debug.LogWarning($"Projectile interaction triggered with unhandled object, tag was: {otherColliderTag}");
