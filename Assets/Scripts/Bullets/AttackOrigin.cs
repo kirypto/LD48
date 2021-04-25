@@ -15,6 +15,7 @@ namespace Bullets
         private readonly IDictionary<ProjectileType, GameObject> _prefabs = new Dictionary<ProjectileType, GameObject>();
         private Transform _transform;
         private Transform _bulletContainer;
+        private Transform _playerTransform;
 
         private void Awake()
         {
@@ -23,6 +24,19 @@ namespace Bullets
 
             _transform = transform;
             _bulletContainer = bulletContainer.transform;
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player == null)
+            {
+                StopApplicationAndThrowArgError("Could not locate Player object in scene");
+            }
+            _playerTransform = player.transform;
+
+        }
+
+        private void Start()
+        {
+            BeginAttackPattern(AttackPatternType.Cross);
+            BeginAttackPattern(AttackPatternType.WazerWall, 3f);
         }
 
         private void ValidateProjectilePrefabs()
@@ -32,20 +46,17 @@ namespace Bullets
                 if (!_prefabs.ContainsKey(type))
                 {
                     string message = $"No prefab specified for projectile type '{type}'";
-#if UNITY_EDITOR
-                    Debug.LogError(message);
-                    EditorApplication.isPlaying = false;
-#else
-                    throw new ArgumentException(message);
-#endif
+                    StopApplicationAndThrowArgError(message);
                 }
             }
         }
 
-        private void Start()
+        private static void StopApplicationAndThrowArgError(string message)
         {
-            BeginAttackPattern(AttackPatternType.Cross);
-            BeginAttackPattern(AttackPatternType.WazerWall, 3f);
+#if UNITY_EDITOR
+                    EditorApplication.isPlaying = false;
+#endif
+                    throw new ArgumentException(message);
         }
 
         private void BeginAttackPattern(AttackPatternType pattern, float timeBeforeStarting = 0f)
@@ -65,7 +76,8 @@ namespace Bullets
                 foreach (ProjectileAttack attack in attackStep.ProjectileAttacks)
                 {
                     GameObject prefab = _prefabs[attack.Type];
-                    GameObject projectile = Instantiate(prefab, _transform.position, LookRotation2D(attack.Trajectory), _bulletContainer);
+                    Vector2 trajectory = attack.Trajectory.magnitude == 0f ? GetTrajectoryTowardsPlayer() : attack.Trajectory;
+                    GameObject projectile = Instantiate(prefab, _transform.position, LookRotation2D(trajectory), _bulletContainer);
                     ProjectileScript projectileScript = projectile.GetComponent<ProjectileScript>();
 
                     projectileScript.Initialize();
@@ -75,6 +87,11 @@ namespace Bullets
                 yield return new WaitForSeconds(attackStep.StepDelay);
             }
             // ReSharper disable once IteratorNeverReturns
+        }
+
+        private Vector2 GetTrajectoryTowardsPlayer()
+        {
+            return (_playerTransform.position - _transform.position).normalized;
         }
 
         private static Quaternion LookRotation2D(Vector2 vector)
