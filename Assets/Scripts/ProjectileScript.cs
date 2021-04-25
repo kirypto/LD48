@@ -1,13 +1,14 @@
 using System;
-using Bullets;
 using Health;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ProjectileScript : MonoBehaviour
 {
     [SerializeField] private float initialFiringForce = 1f;
     [SerializeField] private float collisionDelay = 1f;
     [SerializeField] private float damage = 1f;
+    [SerializeField] private AudioClip spawnSound;
 
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Health;
-using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(HealthBehaviour))]
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> gameObjectsToDisableOnEachWaveEnd;
