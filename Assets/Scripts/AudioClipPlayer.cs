@@ -17,6 +17,7 @@ public class AudioClipPlayer : MonoBehaviour
             throw new InvalidOperationException($"{nameof(AudioClipPlayer)} already initialized");
         }
         _prefab = prefab;
+        _initialized = true;
     }
 
     public static void PlayAudioAtLocation(AudioClip audioClip, Vector2 position)
