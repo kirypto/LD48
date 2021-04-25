@@ -1,5 +1,3 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
@@ -44,6 +42,10 @@ public class ProjectileScript : MonoBehaviour
                 if (IsProjectileCollidingWithFrontOfMirror(mirrorTransform, _transform.position))
                 {
                     print("Hit Front of mirror");
+                    Vector2 reflectionVector = Vector2.Reflect(transform.right, mirrorTransform.right);
+                    _transform.right = reflectionVector.normalized;
+                    _rigidbody2D.velocity = Vector2.zero;
+                    _rigidbody2D.position = (Vector2)_transform.position + reflectionVector * 0.25f;
                 }
                 else
                 {
