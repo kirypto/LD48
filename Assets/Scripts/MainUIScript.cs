@@ -1,40 +1,52 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using Health;
 using UnityEngine;
 using UnityEngine.UI;
+using static InitializationUtils;
 
 public class MainUIScript : MonoBehaviour
 {
-    private Slider _healthSlider;
+    private Slider _enemyHealthSlider;
+    private Slider _playerHealthSlider;
 
     private void Awake()
     {
-        _healthSlider = transform.Find("Canvas").Find("EnemyHealthBar").GetComponent<Slider>();
-        _healthSlider.value = 1f;
+        _enemyHealthSlider = transform.Find("Canvas").Find("EnemyHealthBar").GetComponent<Slider>();
+        _playerHealthSlider = transform.Find("Canvas").Find("PlayerHealthBar").GetComponent<Slider>();
+
+        if (_enemyHealthSlider == null)
+        {
+            StopAndThrowInitializationError("MainUI could not locate EnemyHealthBar Slider");
+        }
+
+        if (_playerHealthSlider == null)
+        {
+            StopAndThrowInitializationError("MainUI could not locate PlayerHealthBar Slider");
+        }
+
+        _enemyHealthSlider.value = 1f;
+        _playerHealthSlider.value = 1f;
     }
 
+    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     private void Start()
     {
         IHealthSystem playerHealth = GameObject.FindWithTag("Player")?.GetComponent<IHealthSystem>();
-        if (playerHealth != null)
-        {
-            playerHealth.OnDamageTaken += playerHealthSystem => print($"Player took damage, now at {playerHealthSystem.Health}");
-            playerHealth.OnWaveDeath += playerHealthSys => print(
-                    $"Enemy downed, is perma-dead? {playerHealthSys.IsPermaDead}, future wave count: {playerHealthSys.FutureWaveCount}");
-
-        }
-
         IHealthSystem enemyHealth = GameObject.FindWithTag("Enemy")?.GetComponent<IHealthSystem>();
-        if (enemyHealth != null)
+        if (playerHealth == null)
         {
-            enemyHealth.OnDamageTaken += enemyHealthSys => print($"Enemy took damage, now at {enemyHealthSys.Health}");
-            enemyHealth.OnWaveDeath += HandleEnemyWaveDeath;
-
-            enemyHealth.OnDamageTaken += heath =>
-            {
-                _healthSlider.value = heath.HealthPercentage;
-            };
+            StopAndThrowInitializationError($"MainUI could not locate Player's {nameof(IHealthSystem)} component");
         }
+
+        if (enemyHealth == null)
+        {
+            StopAndThrowInitializationError($"MainUI could not locate Enemy's {nameof(IHealthSystem)} component");
+        }
+
+        playerHealth.OnDamageTaken += heath => { _playerHealthSlider.value = heath.HealthPercentage; };
+        enemyHealth.OnDamageTaken += heath => { _enemyHealthSlider.value = heath.HealthPercentage; };
+        enemyHealth.OnWaveDeath += HandleEnemyWaveDeath;
     }
 
     private void HandleEnemyWaveDeath(IHealthSystem enemyHealthSystem)
