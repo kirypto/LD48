@@ -49,7 +49,7 @@ MonoBehaviour:
   initialFiringForce: 35
   collisionDelay: 0.25
   damage: 1
-  soundSpan: {fileID: 0}
+  soundSpawn: {fileID: 8300000, guid: 50da20ce91e640d4e82303c10b58ebd7, type: 3}
   soundDamage: {fileID: 0}
   soundWall: {fileID: 0}
   soundReflection: {fileID: 0}

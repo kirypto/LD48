@@ -59,7 +59,10 @@ public class ProjectileScript : MonoBehaviour
         _launched = true;
         _rigidbody2D.AddForce(LaunchVector);
         DelayCollisions();
-        if (_playSpawnSound) { }
+        if (_playSpawnSound)
+        {
+            AudioClipPlayer.PlayAudioAtLocation(soundSpawn, _transform.position);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
