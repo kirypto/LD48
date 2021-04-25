@@ -45,17 +45,19 @@ namespace Bullets
         private void Start()
         {
             BeginAttackPattern(AttackPatternType.Cross);
+            BeginAttackPattern(AttackPatternType.WazerWall, 3f);
         }
 
-        private void BeginAttackPattern(AttackPatternType pattern)
+        private void BeginAttackPattern(AttackPatternType pattern, float timeBeforeStarting = 0f)
         {
             _currentSteps[pattern] = 0;
-            StartCoroutine(AttackPatternLoop(pattern));
+            StartCoroutine(AttackPatternLoop(pattern, timeBeforeStarting));
         }
 
 
-        private IEnumerator AttackPatternLoop(AttackPatternType pattern)
+        private IEnumerator AttackPatternLoop(AttackPatternType pattern, float timeBeforeStarting)
         {
+            yield return new WaitForSeconds(timeBeforeStarting);
             while (true)
             {
                 int currentStep = _currentSteps[pattern];

@@ -2,6 +2,7 @@
 {
     public enum AttackPatternType
     {
-        Cross
+        Cross,
+        WazerWall
     }
 }

@@ -41,6 +41,60 @@ namespace Bullets
                 },
 
                 #endregion
+
+                #region AttackPattern WazerWall
+
+                {
+                        AttackPatternType.WazerWall, new List<AttackStep>
+                        {
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.07f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 0.11f),
+                                new AttackStep(new List<ProjectileAttack>
+                                {
+                                    new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal)
+                                }, 13.2f),
+                        }
+                },
+
+                #endregion
         };
     }
 
