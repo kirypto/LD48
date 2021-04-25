@@ -23,6 +23,10 @@ namespace Bullets
             ValidateProjectilePrefabs();
 
             _transform = transform;
+            if (bulletContainer == null)
+            {
+                StopAndThrowInitializationError("No BulletContainer was provided");
+            }
             _bulletContainer = bulletContainer.transform;
             GameObject player = GameObject.FindWithTag("Player");
             if (player == null)
