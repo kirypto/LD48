@@ -70,8 +70,6 @@ public class ProjectileScript : MonoBehaviour
         switch (otherColliderTag)
         {
             case "Player":
-                Debug.LogError("Projectile interaction with Player is not yet implemented");
-                break;
             case "Enemy":
                 IHealthSystem otherHealthSystem = other.GetComponent<IHealthSystem>();
                 otherHealthSystem.DealDamage(damage);

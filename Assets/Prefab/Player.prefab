@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6631323546938479685}
   - component: {fileID: 1863489584706864936}
-  - component: {fileID: 3696233323864084151}
   - component: {fileID: -4966331715196998238}
+  - component: {fileID: 3696233323864084151}
+  - component: {fileID: 3952330612582692252}
   m_Layer: 14
   m_Name: Player
   m_TagString: Player
@@ -30,7 +31,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6631323546570085706}
   - {fileID: 7817787803699836916}
   - {fileID: 2351913090029683430}
   m_Father: {fileID: 0}
@@ -49,6 +49,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementForce: 1500
+--- !u!114 &-4966331715196998238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208358193090350457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841273dfacca08d479175a050e303db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthWaves:
+  - 15
 --- !u!50 &3696233323864084151
 Rigidbody2D:
   serializedVersion: 4
@@ -70,20 +84,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-4966331715196998238
-MonoBehaviour:
+--- !u!58 &3952330612582692252
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208358193090350457}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841273dfacca08d479175a050e303db4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthWaves:
-  - 15
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &395755442841390783
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +297,7 @@ Transform:
   - {fileID: 962093186365170726}
   - {fileID: 7983321438085800518}
   m_Father: {fileID: 6631323546938479685}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3879514837903494183
 GameObject:
@@ -366,53 +382,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &6631323546570085717
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6631323546570085706}
-  - component: {fileID: 6631323546570085707}
-  m_Layer: 14
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6631323546570085706
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6631323546570085717}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6631323546938479685}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &6631323546570085707
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6631323546570085717}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1001 &3092573851261695032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 741031215105242846, guid: e7ae1104c2a20bd4bacd8fa1d68aeb3c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 741031215105242846, guid: e7ae1104c2a20bd4bacd8fa1d68aeb3c, type: 3}
       propertyPath: m_LocalScale.y
