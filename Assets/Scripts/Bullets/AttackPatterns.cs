@@ -26,13 +26,13 @@ namespace Bullets
                         {
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                        new ProjectileAttack(new Vector2(1f, 0f), "normal"),
-                                        new ProjectileAttack(new Vector2(-1f, 0f), "normal"),
+                                        new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal),
+                                        new ProjectileAttack(new Vector2(-1f, 0f), ProjectileType.Normal),
                                 }, 2),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
-                                        new ProjectileAttack(new Vector2(0f, 1f), "normal"),
-                                        new ProjectileAttack(new Vector2(0f, -1f), "normal"),
+                                        new ProjectileAttack(new Vector2(0f, 1f), ProjectileType.Normal),
+                                        new ProjectileAttack(new Vector2(0f, -1f), ProjectileType.Normal),
                                 }, 10),
                         }
                 },
@@ -53,6 +53,6 @@ namespace Bullets
 
     public readonly struct ProjectileAttack
     {
-        public ProjectileAttack(Vector2 trajectory, string type) { }
+        public ProjectileAttack(Vector2 trajectory, ProjectileType type) { }
     }
 }
