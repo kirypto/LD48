@@ -26,6 +26,17 @@ public class AudioClipPlayer : MonoBehaviour
         {
             throw new InvalidOperationException($"{nameof(AudioClipPlayer)} has not been initialized");
         }
+
+        try
+        {
+            float _ = audioClip.length;
+        }
+        catch (UnassignedReferenceException)
+        {
+            // Provided audio clip is 'null' (Unity AudioClips do not compare to null normally)
+            return;
+        }
+
         AudioClipPlayer player = Instantiate(_prefab, position, Quaternion.identity).GetComponent<AudioClipPlayer>();
         player._audioClip = audioClip;
     }
