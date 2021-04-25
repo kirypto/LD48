@@ -46,28 +46,5 @@ public class MainUIScript : MonoBehaviour
 
         playerHealth.OnDamageTaken += heath => { _playerHealthSlider.value = heath.HealthPercentage; };
         enemyHealth.OnDamageTaken += heath => { _enemyHealthSlider.value = heath.HealthPercentage; };
-        enemyHealth.OnWaveDeath += HandleEnemyWaveDeath;
-    }
-
-    private void HandleEnemyWaveDeath(IHealthSystem enemyHealthSystem)
-    {
-        print($"Enemy downed, is perma-dead? {enemyHealthSystem.IsPermaDead}, " +
-              $"future wave count: {enemyHealthSystem.FutureWaveCount}");
-
-        print("freezing time");
-        Time.timeScale = 0;
-        foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
-        {
-            Destroy(projectile);
-        }
-
-        StartCoroutine(ResetTimeScaleAfterDelay(5f));
-    }
-
-    private IEnumerator ResetTimeScaleAfterDelay(float delayInSeconds)
-    {
-        yield return new WaitForSecondsRealtime(delayInSeconds);
-        print("resuming time");
-        Time.timeScale = 1f;
     }
 }
