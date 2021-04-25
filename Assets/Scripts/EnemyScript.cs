@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Health;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -21,23 +22,27 @@ public class EnemyScript : MonoBehaviour
             gameObjectsToDisableOnEachWaveEnd[_waveCounter].SetActive(false);
         }
 
-        _waveCounter++;
 
-        print("freezing time");
-        Time.timeScale = 0;
+        StartCoroutine(nameof(LoadNextWave));
+    }
+
+    private IEnumerator LoadNextWave()
+    {
+        _waveCounter++;
         foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
         {
             Destroy(projectile);
         }
 
-        StartCoroutine(ResetTimeScaleAfterDelay(5f));
-    }
+        yield return new WaitForEndOfFrame();
+        print("Freezing Time");
+        Time.timeScale = 0;
 
-    private IEnumerator ResetTimeScaleAfterDelay(float delayInSeconds)
-    {
-        yield return new WaitForSecondsRealtime(delayInSeconds);
-        print("resuming time");
+
+        yield return new WaitForSecondsRealtime(5f);
+        print("Resuming time");
         Time.timeScale = 1f;
+        StopCoroutine(nameof(LoadNextWave));
     }
 
 }

@@ -35,11 +35,8 @@ namespace Health
         public void DealDamage(float damage)
         {
             _currentHealth -= damage;
-            if (_currentHealth > 0f)
-            {
-                OnDamageTaken?.Invoke(this);
-            }
-            else
+            OnHealthChange?.Invoke(this);
+            if (_currentHealth <= 0f)
             {
                 HandleWaveDeath();
             }
@@ -47,7 +44,7 @@ namespace Health
 
         public event IHealthSystem.HealthSystemEvent OnWaveDeath;
 
-        public event IHealthSystem.HealthSystemEvent OnDamageTaken;
+        public event IHealthSystem.HealthSystemEvent OnHealthChange;
 
         private T ValidateAliveThenReturn<T>(T toReturn)
         {
@@ -62,12 +59,19 @@ namespace Health
         private void HandleWaveDeath()
         {
             _currentWave += 1;
+            OnWaveDeath?.Invoke(this);
 
             if (!IsPermaDead)
             {
-                _currentHealth = healthWaves[_currentWave];
+                Invoke(nameof(SetHealthForNextWave), 0.01f);
             }
-            OnWaveDeath?.Invoke(this);
+        }
+
+        private void SetHealthForNextWave()
+        {
+            print("Resetting health for next wave");
+            _currentHealth = healthWaves[_currentWave];
+            OnHealthChange?.Invoke(this);
         }
     }
 }

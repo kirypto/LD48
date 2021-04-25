@@ -44,7 +44,7 @@ public class MainUIScript : MonoBehaviour
             StopAndThrowInitializationError($"MainUI could not locate Enemy's {nameof(IHealthSystem)} component");
         }
 
-        playerHealth.OnDamageTaken += heath => { _playerHealthSlider.value = heath.HealthPercentage; };
-        enemyHealth.OnDamageTaken += heath => { _enemyHealthSlider.value = heath.HealthPercentage; };
+        playerHealth.OnHealthChange += heath => { _playerHealthSlider.value = heath.HealthPercentage; };
+        enemyHealth.OnHealthChange += heath => { _enemyHealthSlider.value = heath.HealthPercentage; };
     }
 }

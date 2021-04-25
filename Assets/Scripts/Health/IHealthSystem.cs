@@ -9,7 +9,7 @@
         public int FutureWaveCount { get; }
         public void DealDamage(float damage);
         public event HealthSystemEvent OnWaveDeath;
-        public event HealthSystemEvent OnDamageTaken;
+        public event HealthSystemEvent OnHealthChange;
 
         public delegate void HealthSystemEvent(IHealthSystem healthSystem);
     }
