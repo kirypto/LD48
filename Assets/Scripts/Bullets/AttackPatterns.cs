@@ -8,7 +8,7 @@ namespace Bullets
 {
     public static class AttackPatterns
     {
-        public static AttackStep GetNextAttackStep(string pattern, int stepNumber)
+        public static AttackStep GetNextAttackStep(AttackPatternType pattern, int stepNumber)
         {
             if (!_attackPatterns.ContainsKey(pattern))
             {
@@ -19,10 +19,10 @@ namespace Bullets
             return attackPattern[stepNumber % attackPattern.Count];
         }
 
-        private static readonly IDictionary<string, AttackPattern> _attackPatterns = new Dictionary<string, AttackPattern>
+        private static readonly IDictionary<AttackPatternType, AttackPattern> _attackPatterns = new Dictionary<AttackPatternType, AttackPattern>
         {
                 {
-                        "cross", new List<AttackStep>
+                        AttackPatternType.Cross, new List<AttackStep>
                         {
                                 new AttackStep(new List<ProjectileAttack>
                                 {
