@@ -164,3 +164,6 @@ Bin/
 
 # Scenes for local testing
 Assets/Scenes/local_*
+
+# Rider fighting file
+.idea/.idea.LD48/.idea/indexLayout.xml
