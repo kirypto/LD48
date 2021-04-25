@@ -8,7 +8,7 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private float initialFiringForce = 1f;
     [SerializeField] private float collisionDelay = 1f;
     [SerializeField] private float damage = 1f;
-    [SerializeField] private AudioClip soundSpan;
+    [SerializeField] private AudioClip soundSpawn;
     [SerializeField] private AudioClip soundDamage;
     [SerializeField] private AudioClip soundWall;
     [SerializeField] private AudioClip soundReflection;
