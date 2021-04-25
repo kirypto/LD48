@@ -1,13 +1,18 @@
+using Health;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     [SerializeField]
     private float _movementForce = 1f;
 
+    // TODO: Move this out of movement script
+    [SerializeField] private AudioClip deathClip;
+
     private Rigidbody2D _rigidbody;
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
+        GetComponent<IHealthSystem>().OnWaveDeath += _ => AudioClipPlayer.PlayAudioAtLocation(deathClip, transform.position);
     }
 
     private void Update() {
