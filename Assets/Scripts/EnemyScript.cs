@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> gameObjectsToDisableOnEachWaveEnd;
+    [SerializeField] private AudioClip waveDeathClip;
 
     private int _waveCounter;
 
@@ -28,6 +29,7 @@ public class EnemyScript : MonoBehaviour
 
     private IEnumerator LoadNextWave()
     {
+        AudioClipPlayer.PlayAudioAtLocation(waveDeathClip, transform.position);
         _waveCounter++;
         foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
         {

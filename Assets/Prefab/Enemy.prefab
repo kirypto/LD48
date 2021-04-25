@@ -503,6 +503,7 @@ MonoBehaviour:
   - {fileID: 37271538635968082}
   - {fileID: 8001118114892955142}
   - {fileID: 3598988440154968889}
+  waveDeathClip: {fileID: 8300000, guid: d70a60cb05a6e6648af737a75b620938, type: 3}
 --- !u!114 &4780092257719826565
 MonoBehaviour:
   m_ObjectHideFlags: 0
