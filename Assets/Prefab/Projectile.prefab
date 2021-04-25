@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialFiringForce: 35
+  collisionDelay: 0.25
 --- !u!50 &8160909157732824031
 Rigidbody2D:
   serializedVersion: 4
