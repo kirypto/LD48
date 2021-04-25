@@ -2,6 +2,7 @@
 {
     public enum ProjectileType
     {
-        Normal
+        Normal,
+        WazerBeam,
     }
 }
