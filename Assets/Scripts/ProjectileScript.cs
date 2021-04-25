@@ -71,6 +71,7 @@ public class ProjectileScript : MonoBehaviour
         if ("Wall" == otherColliderTag)
         {
             Destroy(gameObject);
+            AudioClipPlayer.PlayAudioAtLocation(soundWall, _transform.position);
             return;
         }
 
@@ -86,6 +87,7 @@ public class ProjectileScript : MonoBehaviour
                 IHealthSystem otherHealthSystem = other.GetComponent<IHealthSystem>();
                 otherHealthSystem.DealDamage(damage);
                 Destroy(gameObject);
+                AudioClipPlayer.PlayAudioAtLocation(soundDamage, _transform.position);
                 break;
             case "Mirror":
                 Transform mirrorTransform = other.transform;
@@ -96,6 +98,7 @@ public class ProjectileScript : MonoBehaviour
                     _rigidbody2D.velocity = Vector2.zero;
                     _rigidbody2D.AddForce(LaunchVector);
                     DelayCollisions();
+                    AudioClipPlayer.PlayAudioAtLocation(soundReflection, _transform.position);
                 }
 
                 break;
