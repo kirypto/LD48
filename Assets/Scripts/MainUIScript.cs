@@ -14,7 +14,7 @@ public class MainUIScript : MonoBehaviour
         IHealthSystem enemyHealth = GameObject.FindWithTag("Enemy")?.GetComponent<IHealthSystem>();
         if (enemyHealth != null)
         {
-            enemyHealth.OnDamageTaken += enemyHealthSys => print($"Player took damage, now at {enemyHealthSys.Health}");
+            enemyHealth.OnDamageTaken += enemyHealthSys => print($"Enemy took damage, now at {enemyHealthSys.Health}");
         }
     }
 }
