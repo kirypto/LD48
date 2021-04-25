@@ -1,4 +1,5 @@
-﻿using Health;
+﻿using System.Collections;
+using Health;
 using UnityEngine;
 
 public class MainUIScript : MonoBehaviour
@@ -17,8 +18,29 @@ public class MainUIScript : MonoBehaviour
         if (enemyHealth != null)
         {
             enemyHealth.OnDamageTaken += enemyHealthSys => print($"Enemy took damage, now at {enemyHealthSys.Health}");
-            enemyHealth.OnWaveDeath += enemyHealthSys => print($"Enemy downed, is perma-dead? {enemyHealthSys.IsPermaDead}, " +
-                                                               $"future wave count: {enemyHealthSys.FutureWaveCount}");
+            enemyHealth.OnWaveDeath += HandleEnemyWaveDeath;
         }
+    }
+
+    private void HandleEnemyWaveDeath(IHealthSystem enemyHealthSystem)
+    {
+        print($"Enemy downed, is perma-dead? {enemyHealthSystem.IsPermaDead}, " +
+                                       $"future wave count: {enemyHealthSystem.FutureWaveCount}");
+
+        print("freezing time");
+        Time.timeScale = 0;
+        foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
+        {
+            Destroy(projectile);
+        }
+
+        StartCoroutine(ResetTimeScaleAfterDelay(5f));
+    }
+
+    private IEnumerator ResetTimeScaleAfterDelay(float delayInSeconds)
+    {
+        yield return new WaitForSecondsRealtime(delayInSeconds);
+        print("resuming time");
+        Time.timeScale = 1f;
     }
 }
