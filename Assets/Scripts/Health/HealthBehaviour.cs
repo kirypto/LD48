@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 using static InitializationUtils;
 
 namespace Health
@@ -23,29 +22,52 @@ namespace Health
             _currentHealth = healthWaves[_currentWave];
         }
 
-        public float Health => _currentHealth;
-        public float HealthMax => healthWaves[_currentWave];
-        public float HealthPercentage => HealthMax / Health;
+        public float Health => ValidateAliveThenReturn(_currentHealth);
+
+        public float HealthMax => ValidateAliveThenReturn(healthWaves[_currentWave]);
+
+        public float HealthPercentage => ValidateAliveThenReturn(HealthMax / Health);
+
+        public bool IsPermaDead => _currentWave >= healthWaves.Count;
+
+        public int FutureWaveCount => ValidateAliveThenReturn(healthWaves.Count - _currentWave);
+
         public void DealDamage(float damage)
         {
             _currentHealth -= damage;
-            if (_currentHealth <= 0f)
+            if (_currentHealth > 0f)
+            {
+                OnDamageTaken?.Invoke(this);
+            }
+            else
             {
                 HandleWaveDeath();
             }
         }
 
+        public event IHealthSystem.HealthSystemEvent OnWaveDeath;
+
+        public event IHealthSystem.HealthSystemEvent OnDamageTaken;
+
+        private T ValidateAliveThenReturn<T>(T toReturn)
+        {
+            if (IsPermaDead)
+            {
+                throw new InvalidOperationException($"Object {name} is perma-dead");
+            }
+
+            return toReturn;
+        }
+
         private void HandleWaveDeath()
         {
-            OnDeath?.Invoke();
             _currentWave += 1;
 
-            if (_currentWave < healthWaves.Count)
+            if (!IsPermaDead)
             {
                 _currentHealth = healthWaves[_currentWave];
             }
+            OnWaveDeath?.Invoke(this);
         }
-
-        public event IHealthSystem.OnDeathEvent OnDeath;
     }
 }
