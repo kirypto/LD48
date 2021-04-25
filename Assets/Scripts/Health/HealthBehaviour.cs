@@ -26,7 +26,7 @@ namespace Health
 
         public float HealthMax => ValidateAliveThenReturn(healthWaves[_currentWave]);
 
-        public float HealthPercentage => ValidateAliveThenReturn(HealthMax / Health);
+        public float HealthPercentage => ValidateAliveThenReturn(Health / HealthMax);
 
         public bool IsPermaDead => _currentWave >= healthWaves.Count;
 
