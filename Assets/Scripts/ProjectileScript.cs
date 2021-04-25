@@ -2,7 +2,6 @@ using System;
 using Health;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileScript : MonoBehaviour
 {
@@ -15,7 +14,6 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private AudioClip soundReflection;
 
     private Rigidbody2D _rigidbody2D;
-    private AudioSource _audioSource;
     private Transform _transform;
     private float _speed = 1f;
     private bool _isDisabled = true;
@@ -53,7 +51,6 @@ public class ProjectileScript : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _audioSource = GetComponent<AudioSource>();
         _transform = transform;
     }
 
@@ -62,10 +59,7 @@ public class ProjectileScript : MonoBehaviour
         _launched = true;
         _rigidbody2D.AddForce(LaunchVector);
         DelayCollisions();
-        if (_playSpawnSound)
-        {
-            _audioSource.PlayOneShot(soundSpan);
-        }
+        if (_playSpawnSound) { }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
