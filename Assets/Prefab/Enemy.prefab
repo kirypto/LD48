@@ -46,4 +46,6 @@ MonoBehaviour:
   bulletContainer: {fileID: 0}
   prefabList:
   - projectileType: 0
-    prefab: {fileID: 1984692809892057313, guid: 26d248b939155b747b0f4dd64d5f4f21, type: 3}
+    prefab: {fileID: 1984692809892057313, guid: 7bba0766fff1cfe4683277b8c064c1cc, type: 3}
+  - projectileType: 1
+    prefab: {fileID: 1984692809892057313, guid: 7d2c9dd3680445b488b077087127f9b9, type: 3}
