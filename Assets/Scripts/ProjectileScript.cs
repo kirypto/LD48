@@ -1,10 +1,13 @@
 using System;
+using Bullets;
+using Health;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
     [SerializeField] private float initialFiringForce = 1f;
     [SerializeField] private float collisionDelay = 1f;
+    [SerializeField] private float damage = 1f;
 
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;
@@ -14,7 +17,7 @@ public class ProjectileScript : MonoBehaviour
 
     private Vector2 LaunchVector => _transform.right * _speed * initialFiringForce;
 
-    public void Initialize(float? speed = null, float? collisionDelaySeconds = null)
+    public void Initialize(float? speed = null, float? collisionDelaySeconds = null, float? projectileDamage = null)
     {
         if (_launched)
         {
@@ -29,6 +32,11 @@ public class ProjectileScript : MonoBehaviour
         if (collisionDelaySeconds != null)
         {
             collisionDelay = collisionDelaySeconds.Value;
+        }
+
+        if (projectileDamage != null)
+        {
+            damage = projectileDamage.Value;
         }
     }
 
@@ -56,7 +64,6 @@ public class ProjectileScript : MonoBehaviour
 
         if (_isDisabled)
         {
-            print("Ignoring collision, still disabled");
             return;
         }
 
@@ -66,7 +73,9 @@ public class ProjectileScript : MonoBehaviour
                 Debug.LogError("Projectile interaction with Player is not yet implemented");
                 break;
             case "Enemy":
-                Debug.LogError("Projectile interaction with Enemy is not yet implemented");
+                IHealthSystem otherHealthSystem = other.GetComponent<IHealthSystem>();
+                otherHealthSystem.DealDamage(damage);
+                Destroy(gameObject);
                 break;
             case "Mirror":
                 Transform mirrorTransform = other.transform;
