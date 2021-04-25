@@ -15,12 +15,15 @@ namespace Bullets
                 // ReSharper disable once StringLiteralTypo
                 throw new ArgumentException($"Welp, you dun goofed. Ain't no such {pattern} pattern.");
             }
+
             AttackPattern attackPattern = _attackPatterns[pattern];
             return attackPattern[stepNumber % attackPattern.Count];
         }
 
         private static readonly IDictionary<AttackPatternType, AttackPattern> _attackPatterns = new Dictionary<AttackPatternType, AttackPattern>
         {
+                #region AttackPattern Cross
+
                 {
                         AttackPatternType.Cross, new List<AttackStep>
                         {
@@ -28,14 +31,16 @@ namespace Bullets
                                 {
                                         new ProjectileAttack(new Vector2(1f, 0f), ProjectileType.Normal),
                                         new ProjectileAttack(new Vector2(-1f, 0f), ProjectileType.Normal),
-                                }, 2),
+                                }, .7f),
                                 new AttackStep(new List<ProjectileAttack>
                                 {
                                         new ProjectileAttack(new Vector2(0f, 1f), ProjectileType.Normal),
                                         new ProjectileAttack(new Vector2(0f, -1f), ProjectileType.Normal),
-                                }, 10),
+                                }, 4f),
                         }
                 },
+
+                #endregion
         };
     }
 
@@ -53,6 +58,13 @@ namespace Bullets
 
     public readonly struct ProjectileAttack
     {
-        public ProjectileAttack(Vector2 trajectory, ProjectileType type) { }
+        public Vector2 Trajectory { get; }
+        public ProjectileType Type { get; }
+
+        public ProjectileAttack(Vector2 trajectory, ProjectileType type)
+        {
+            Trajectory = trajectory;
+            Type = type;
+        }
     }
 }
