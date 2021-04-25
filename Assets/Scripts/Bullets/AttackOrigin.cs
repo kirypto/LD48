@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using static InitializationUtils;
 
 namespace Bullets
 {
@@ -27,7 +27,7 @@ namespace Bullets
             GameObject player = GameObject.FindWithTag("Player");
             if (player == null)
             {
-                StopApplicationAndThrowArgError("Could not locate Player object in scene");
+                StopAndThrowInitializationError("Could not locate Player object in scene");
             }
             _playerTransform = player.transform;
 
@@ -46,17 +46,9 @@ namespace Bullets
                 if (!_prefabs.ContainsKey(type))
                 {
                     string message = $"No prefab specified for projectile type '{type}'";
-                    StopApplicationAndThrowArgError(message);
+                    StopAndThrowInitializationError(message);
                 }
             }
-        }
-
-        private static void StopApplicationAndThrowArgError(string message)
-        {
-#if UNITY_EDITOR
-                    EditorApplication.isPlaying = false;
-#endif
-                    throw new ArgumentException(message);
         }
 
         private void BeginAttackPattern(AttackPatternType pattern, float timeBeforeStarting = 0f)
