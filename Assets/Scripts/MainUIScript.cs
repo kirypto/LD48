@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using Health;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +41,22 @@ public class MainUIScript : MonoBehaviour
 
         _enemyHealthSlider.value = 1f;
         _playerHealthSlider.value = 1f;
+
+        StartCoroutine(nameof(FadeInGame));
+    }
+
+    private IEnumerator FadeInGame()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 0;
+        for (float alpha = 1; alpha >= 0; alpha -= 0.02f)
+        {
+            SetBlackoutAlpha(alpha);
+            yield return new WaitForSecondsRealtime(0.05f);
+        }
+
+        Time.timeScale = 1;
+        StopCoroutine(nameof(FadeInGame));
     }
 
     [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
