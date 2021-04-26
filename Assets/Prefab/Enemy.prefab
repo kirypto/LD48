@@ -522,6 +522,8 @@ MonoBehaviour:
     prefab: {fileID: 1984692809892057313, guid: 7bba0766fff1cfe4683277b8c064c1cc, type: 3}
   - projectileType: 1
     prefab: {fileID: 1984692809892057313, guid: 7d2c9dd3680445b488b077087127f9b9, type: 3}
+  - projectileType: 2
+    prefab: {fileID: 1984692809892057313, guid: bd3f8298eba8b324abae09fa864f6932, type: 3}
 --- !u!114 &3500874457995269462
 MonoBehaviour:
   m_ObjectHideFlags: 0
