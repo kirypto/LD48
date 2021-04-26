@@ -20,7 +20,7 @@ public class AudioClipPlayer : MonoBehaviour
         _initialized = true;
     }
 
-    public static void PlayAudioAtLocation(AudioClip audioClip, Vector2 position)
+    public static void PlayAudioAtLocation(AudioClip audioClip, Vector2 position, float volume = 1f)
     {
         if (!_initialized)
         {
@@ -39,22 +39,23 @@ public class AudioClipPlayer : MonoBehaviour
 
         AudioClipPlayer player = Instantiate(_prefab, position, Quaternion.identity).GetComponent<AudioClipPlayer>();
         player._audioClip = audioClip;
+        player._volume = volume;
     }
 
     #endregion
 
     private AudioClip _audioClip;
-
-    private AudioSource _audioSource;
+    private AudioSource _audioSource; 
+    private float _volume;
 
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();       
     }
 
-    private void Start()
-    {
-        _audioSource.PlayOneShot(_audioClip);
+    private void Start() {
+        _audioSource.volume = _volume;
+        _audioSource.PlayOneShot(_audioClip);      
         Invoke(nameof(Kill), _audioClip.length);
     }
 

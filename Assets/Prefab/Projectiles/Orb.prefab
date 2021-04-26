@@ -51,7 +51,7 @@ MonoBehaviour:
   damage: 1
   soundSpawn: {fileID: 8300000, guid: bba49e9e1d122b7459b8941ad07c6456, type: 3}
   soundDamage: {fileID: 8300000, guid: 0bc062deeddee9a4dbd4a9eaaad7856f, type: 3}
-  soundWall: {fileID: 8300000, guid: 40978d1cc46486b4da125c6368b639b7, type: 3}
+  soundWall: {fileID: 0}
   soundReflection: {fileID: 8300000, guid: 95f94ff502ac5a946b3438526df358aa, type: 3}
 --- !u!50 &8160909157732824031
 Rigidbody2D:

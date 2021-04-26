@@ -61,7 +61,7 @@ public class ProjectileScript : MonoBehaviour
         DelayCollisions();
         if (_playSpawnSound)
         {
-            AudioClipPlayer.PlayAudioAtLocation(soundSpawn, _transform.position);
+            AudioClipPlayer.PlayAudioAtLocation(soundSpawn, _transform.position, 0.5f);
         }
     }
 
@@ -71,7 +71,7 @@ public class ProjectileScript : MonoBehaviour
         if ("Wall" == otherColliderTag)
         {
             Destroy(gameObject);
-            AudioClipPlayer.PlayAudioAtLocation(soundWall, _transform.position);
+            AudioClipPlayer.PlayAudioAtLocation(soundWall, _transform.position, 0.5f);
             return;
         }
 
@@ -98,7 +98,7 @@ public class ProjectileScript : MonoBehaviour
                     _rigidbody2D.velocity = Vector2.zero;
                     _rigidbody2D.AddForce(LaunchVector);
                     DelayCollisions();
-                    AudioClipPlayer.PlayAudioAtLocation(soundReflection, _transform.position);
+                    AudioClipPlayer.PlayAudioAtLocation(soundReflection, _transform.position, 0.5f);
                 }
 
                 break;
