@@ -5,7 +5,7 @@ using System.Linq;
 using Bullets;
 using Health;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 using static InitializationUtils;
 
 [RequireComponent(typeof(HealthBehaviour))]
@@ -47,7 +47,7 @@ public class EnemyScript : MonoBehaviour
         });
     }
 
-    private void HandleEnemyWaveDeath(IHealthSystem ignored)
+    private void HandleEnemyWaveDeath(IHealthSystem enemyHealth)
     {
         if (_waveCounter < gameObjectsToDisableOnEachWaveEnd.Count)
         {
@@ -55,7 +55,32 @@ public class EnemyScript : MonoBehaviour
         }
 
 
-        StartCoroutine(nameof(LoadNextWave));
+        StartCoroutine(enemyHealth.IsPermaDead ? nameof(SlowAndWin) : nameof(LoadNextWave));
+    }
+
+
+    private IEnumerator SlowAndWin()
+    {
+        Time.timeScale = 0.75f;
+        yield return new WaitForSecondsRealtime(0.15f);
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(0.15f);
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(0.15f);
+        Time.timeScale = 0.35f;
+        yield return new WaitForSecondsRealtime(0.25f);
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(0.25f);
+        Time.timeScale = 0.1f;
+        yield return new WaitForSecondsRealtime(0.35f);
+        Time.timeScale = 0f;
+        for (float alpha = 0; alpha <= 1; alpha += 0.02f)
+        {
+            yield return new WaitForSecondsRealtime(0.05f);
+            MainUIScript.SetBlackoutAlpha(alpha);
+        }
+        StopCoroutine(nameof(SlowAndWin));
+        SceneManager.LoadScene("WinScreen");
     }
 
     private IEnumerator LoadNextWave()
