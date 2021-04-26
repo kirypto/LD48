@@ -6,5 +6,6 @@
         WazerWall,
         FireSpiral,
         CounterClockwiseOrbWall,
+        ClockwiseOrbWallWithGaps,
     }
 }

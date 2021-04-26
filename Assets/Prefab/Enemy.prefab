@@ -510,6 +510,8 @@ MonoBehaviour:
       delayInSeconds: 1
     - attackPattern: 1
       delayInSeconds: 11
+    - attackPattern: 3
+      delayInSeconds: 2
   - attackPatterns:
     - attackPattern: 1
       delayInSeconds: 3
