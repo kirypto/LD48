@@ -1,5 +1,6 @@
 using System.Collections;
 using Health;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour {
         SceneManager.LoadScene("GameOver");
     }
 
-    private void Update() {
+    private void Update() {       
         LookAtMouse();
         if (Input.GetKey(KeyCode.Backslash))
         {
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.right = vectorToMouse;
     }
 
-    private void HandleDirectionalInput() {
+    private void HandleDirectionalInput() {       
         if (UpHeld()) {
             _rigidbody.AddForce(Vector2.up * _movementForce);
         }
@@ -96,7 +97,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private static bool UpHeld() {
-        return Input.GetKey(KeyCode.W);
+        float upaxis = Input.GetAxis("Vertical2");
+        print("up axis: " + upaxis);
+        return Input.GetKey(KeyCode.W) || upaxis > 0.5f;
     }
 
     private static bool LeftHeld() {
