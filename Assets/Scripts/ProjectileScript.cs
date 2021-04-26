@@ -53,6 +53,19 @@ public class ProjectileScript : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _transform = transform;
+
+
+        IHealthSystem playerHealth = GameObject.FindWithTag("Player")?.GetComponent<IHealthSystem>();
+        IHealthSystem enemyHealth = GameObject.FindWithTag("Enemy")?.GetComponent<IHealthSystem>();
+        if (playerHealth != null)
+        {
+            playerHealth.OnWaveDeath += _ => _isDisabled = true;
+        }
+
+        if (enemyHealth != null)
+        {
+            enemyHealth.OnWaveDeath += _ => _isDisabled = true;
+        }
     }
 
     private void Start()
