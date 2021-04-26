@@ -13,8 +13,11 @@ public class PlayerMovement : MonoBehaviour {
 
     private Rigidbody2D _rigidbody;
     private IHealthSystem _playerHealth;
+    private Camera _camera;
 
-    private void Awake() {
+    private void Awake()
+    {
+        _camera = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerHealth = GetComponent<IHealthSystem>();
         _playerHealth.OnWaveDeath += playerHealth =>
@@ -68,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void LookAtMouse() {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint((Vector2) Input.mousePosition);
+        Vector3 mousePosition = _camera.ScreenToWorldPoint((Vector2) Input.mousePosition);
 
         Vector2 vectorToMouse = ((Vector2) (mousePosition - transform.position)).normalized;
         transform.right = vectorToMouse;
