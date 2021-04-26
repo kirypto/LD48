@@ -49,13 +49,14 @@ public class EnemyScript : MonoBehaviour
 
     private void HandleEnemyWaveDeath(IHealthSystem enemyHealth)
     {
-        if (_waveCounter < gameObjectsToDisableOnEachWaveEnd.Count)
+        if (enemyHealth.IsPermaDead)
         {
-            gameObjectsToDisableOnEachWaveEnd[_waveCounter].SetActive(false);
+            StartCoroutine(nameof(SlowAndWin));
         }
-
-
-        StartCoroutine(enemyHealth.IsPermaDead ? nameof(SlowAndWin) : nameof(LoadNextWave));
+        else
+        {
+            StartCoroutine(nameof(LoadNextWave));
+        }
     }
 
 
@@ -86,7 +87,6 @@ public class EnemyScript : MonoBehaviour
     private IEnumerator LoadNextWave()
     {
         AudioClipPlayer.PlayAudioAtLocation(waveDeathClip, transform.position);
-        _waveCounter++;
         foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
         {
             Destroy(projectile);
@@ -97,7 +97,24 @@ public class EnemyScript : MonoBehaviour
         Time.timeScale = 0;
 
 
-        yield return new WaitForSecondsRealtime(1.5f);
+        if (_waveCounter < gameObjectsToDisableOnEachWaveEnd.Count)
+        {
+            GameObject shellToFade = gameObjectsToDisableOnEachWaveEnd[_waveCounter];
+            SpriteRenderer shellSpriteRenderer = shellToFade.GetComponent<SpriteRenderer>();
+            Color color = shellSpriteRenderer.color;
+
+            for (float alpha = 1; alpha >= 0; alpha -= 0.05f)
+            {
+                shellSpriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
+                yield return new WaitForSecondsRealtime(0.1f);
+            }
+
+            shellToFade.SetActive(false);
+        }
+        _waveCounter++;
+
+
+        yield return new WaitForSecondsRealtime(0.25f);
         print("Resuming time");
         Time.timeScale = 1f;
         ScheduleCurrentWaveAttackPatterns();
