@@ -3,7 +3,7 @@
     public enum ProjectileType
     {
         Normal,
-        WazerBeam,
+        WazerBeamNotReflectable,
         FireBall,
         OrbNotReflectable,
         OrbReflectable,
