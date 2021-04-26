@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Health;
 using Unity.VisualScripting;
@@ -71,22 +72,42 @@ public class PlayerMovement : MonoBehaviour {
         HandleDirectionalInput();       
     }
 
-    private void LookAtMouse() {
-        Vector3 mousePosition = _camera.ScreenToWorldPoint((Vector2) Input.mousePosition);
+    private Vector3 _lastMousePos;
 
-        Vector2 vectorToMouse = ((Vector2) (mousePosition - transform.position)).normalized;
-        transform.right = vectorToMouse;
+    private void LookAtMouse() {
+        float xCameraLookJoystick = Input.GetAxis("Roll");
+        float yCameraLookJoystick = Input.GetAxis("Pitch");
+
+        Vector2 cameraLookFromJoystick = new Vector2(xCameraLookJoystick, yCameraLookJoystick);
+        Vector3 mousePosition = _camera.ScreenToWorldPoint((Vector2) Input.mousePosition);
+        Vector2 cameraLookFromMouse = ((Vector2) (mousePosition - transform.position)).normalized;
+        Vector2 lookDirection = Vector2.zero;
+        if (cameraLookFromJoystick.magnitude > 0f)
+        {
+            lookDirection = cameraLookFromJoystick;
+        }
+        else if (_lastMousePos != mousePosition)
+        {
+            _lastMousePos = mousePosition;
+            lookDirection = cameraLookFromMouse;
+        }
+
+        if (lookDirection.magnitude > 0f)
+        {
+            transform.right = lookDirection.normalized;
+        }
     }
 
     private void HandleDirectionalInput()
     {
-        float xMovement = Mathf.Clamp(Input.GetAxis("Horizontal") + Input.GetAxis("Horizontal2"), -1f, 1f);
-        float yMovement = Mathf.Clamp(Input.GetAxis("Vertical") + Input.GetAxis("Vertical2"), -1f, 1f);
+        float xMovement = Input.GetAxis("Horizontal") + Input.GetAxis("Horizontal2");
+        float yMovement = Input.GetAxis("Vertical") + Input.GetAxis("Vertical2");
 
         Vector2 movementVector = new Vector2(xMovement, yMovement);
         if (movementVector.magnitude > 0f)
         {
-            _rigidbody.AddForce(movementVector * _movementForce);
+            Vector2 movementClamped = movementVector.magnitude > 1f ? movementVector.normalized : movementVector;
+            _rigidbody.AddForce(movementClamped * _movementForce);
         }
     }
 }
