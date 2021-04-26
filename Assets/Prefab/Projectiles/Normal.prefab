@@ -53,6 +53,7 @@ MonoBehaviour:
   soundDamage: {fileID: 8300000, guid: 0bc062deeddee9a4dbd4a9eaaad7856f, type: 3}
   soundWall: {fileID: 0}
   soundReflection: {fileID: 8300000, guid: 95f94ff502ac5a946b3438526df358aa, type: 3}
+  canBeDeflected: 1
 --- !u!50 &8160909157732824031
 Rigidbody2D:
   serializedVersion: 4
@@ -147,15 +148,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3867810012180788768, guid: 96779428c03596c46978a981571d4866, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.56078434
       objectReference: {fileID: 0}
     - target: {fileID: 3867810012180788768, guid: 96779428c03596c46978a981571d4866, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.63529414
       objectReference: {fileID: 0}
     - target: {fileID: 3867810012180788768, guid: 96779428c03596c46978a981571d4866, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96779428c03596c46978a981571d4866, type: 3}
