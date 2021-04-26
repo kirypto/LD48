@@ -15,6 +15,7 @@ namespace Health
         private float _currentHealth;
         private IList<SpriteRenderer> _renderersToFlashOnHit = new List<SpriteRenderer>();
         private IList<Color> _renderersOriginalColours = new List<Color>();
+        private bool _isFlashing;
 
         private void Awake()
         {
@@ -57,7 +58,7 @@ namespace Health
             {
                 HandleWaveDeath();
             }
-            else
+            else if (!_isFlashing)
             {
                 StartCoroutine(nameof(FlashSpriteRenders));
             }
@@ -88,6 +89,7 @@ namespace Health
             }
 
             StopCoroutine(nameof(FlashSpriteRenders));
+            _isFlashing = false;
         }
 
         public event IHealthSystem.HealthSystemEvent OnWaveDeath;
