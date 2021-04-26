@@ -504,6 +504,17 @@ MonoBehaviour:
   - {fileID: 8001118114892955142}
   - {fileID: 3598988440154968889}
   waveDeathClip: {fileID: 8300000, guid: d70a60cb05a6e6648af737a75b620938, type: 3}
+  attackPatternsByWave:
+  - attackPatterns:
+    - attackPattern: 0
+      delayInSeconds: 1
+    - attackPattern: 1
+      delayInSeconds: 11
+  - attackPatterns:
+    - attackPattern: 1
+      delayInSeconds: 3
+    - attackPattern: 2
+      delayInSeconds: 15
 --- !u!114 &4780092257719826565
 MonoBehaviour:
   m_ObjectHideFlags: 0

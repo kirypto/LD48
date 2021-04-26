@@ -1,19 +1,50 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Bullets;
 using Health;
 using UnityEngine;
 
+using static InitializationUtils;
+
 [RequireComponent(typeof(HealthBehaviour))]
+[RequireComponent(typeof(AttackOrigin))]
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> gameObjectsToDisableOnEachWaveEnd;
     [SerializeField] private AudioClip waveDeathClip;
+    [SerializeField] private List<AttackPatternForWave> attackPatternsByWave;
 
+    private AttackOrigin _attackOrigin;
     private int _waveCounter;
 
     private void Awake()
     {
-        gameObject.GetComponent<IHealthSystem>().OnWaveDeath += HandleEnemyWaveDeath;
+        if (attackPatternsByWave.Select(inner => inner.attackPatterns.Count).Aggregate((a, b) => a + b) == 0)
+        {
+            StopAndThrowInitializationError("Field attackPatternsByWave was not initialized");
+        }
+        GetComponent<IHealthSystem>().OnWaveDeath += HandleEnemyWaveDeath;
+        _attackOrigin = GetComponent<AttackOrigin>();
+    }
+
+    private void Start()
+    {
+        ScheduleCurrentWaveAttackPatterns();
+    }
+
+    private void ScheduleCurrentWaveAttackPatterns()
+    {
+        if (_waveCounter >= attackPatternsByWave.Count)
+        {
+            return;
+        }
+
+        attackPatternsByWave[_waveCounter].attackPatterns.ForEach(attackPatternWithDelay =>
+        {
+            _attackOrigin.BeginAttackPattern(attackPatternWithDelay.attackPattern, attackPatternWithDelay.delayInSeconds);
+        });
     }
 
     private void HandleEnemyWaveDeath(IHealthSystem ignored)
@@ -44,7 +75,22 @@ public class EnemyScript : MonoBehaviour
         yield return new WaitForSecondsRealtime(5f);
         print("Resuming time");
         Time.timeScale = 1f;
+        ScheduleCurrentWaveAttackPatterns();
         StopCoroutine(nameof(LoadNextWave));
     }
 
+}
+
+[Serializable]
+public struct AttackPatternForWave
+{
+    public List<PatternDelayPair> attackPatterns;
+}
+
+
+[Serializable]
+public struct PatternDelayPair
+{
+    public AttackPatternType attackPattern;
+    public float delayInSeconds;
 }

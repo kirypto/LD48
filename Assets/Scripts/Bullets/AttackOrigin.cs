@@ -37,12 +37,6 @@ namespace Bullets
 
         }
 
-        private void Start()
-        {
-            BeginAttackPattern(AttackPatternType.Cross);
-            BeginAttackPattern(AttackPatternType.WazerWall, 3f);
-        }
-
         private void ValidateProjectilePrefabs()
         {
             foreach (ProjectileType type in (ProjectileType[]) Enum.GetValues(typeof(ProjectileType)))
@@ -55,7 +49,7 @@ namespace Bullets
             }
         }
 
-        private void BeginAttackPattern(AttackPatternType pattern, float timeBeforeStarting = 0f)
+        public void BeginAttackPattern(AttackPatternType pattern, float timeBeforeStarting = 0f)
         {
             _currentSteps[pattern] = 0;
             StartCoroutine(AttackPatternLoop(pattern, timeBeforeStarting));
