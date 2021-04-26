@@ -14,7 +14,7 @@ public class AudioClipPlayer : MonoBehaviour
     {
         if (_initialized)
         {
-            throw new InvalidOperationException($"{nameof(AudioClipPlayer)} already initialized");
+            return;
         }
         _prefab = prefab;
         _initialized = true;
