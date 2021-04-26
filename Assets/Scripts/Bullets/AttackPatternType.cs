@@ -5,5 +5,6 @@
         Cross,
         WazerWall,
         FireSpiral,
+        CounterClockwiseOrbWall,
     }
 }

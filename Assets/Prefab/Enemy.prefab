@@ -513,7 +513,7 @@ MonoBehaviour:
   - attackPatterns:
     - attackPattern: 1
       delayInSeconds: 3
-    - attackPattern: 2
+    - attackPattern: 3
       delayInSeconds: 15
 --- !u!114 &4780092257719826565
 MonoBehaviour:
@@ -535,6 +535,8 @@ MonoBehaviour:
     prefab: {fileID: 1984692809892057313, guid: 7d2c9dd3680445b488b077087127f9b9, type: 3}
   - projectileType: 2
     prefab: {fileID: 1984692809892057313, guid: bd3f8298eba8b324abae09fa864f6932, type: 3}
+  - projectileType: 3
+    prefab: {fileID: 1984692809892057313, guid: f46141bf66f4de04ba17fd14949c97a8, type: 3}
 --- !u!114 &3500874457995269462
 MonoBehaviour:
   m_ObjectHideFlags: 0

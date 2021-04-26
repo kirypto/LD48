@@ -5,5 +5,6 @@
         Normal,
         WazerBeam,
         FireBall,
+        Orb,
     }
 }
