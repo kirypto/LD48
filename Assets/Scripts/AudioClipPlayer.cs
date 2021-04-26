@@ -31,7 +31,7 @@ public class AudioClipPlayer : MonoBehaviour
         {
             float _ = audioClip.length;
         }
-        catch (UnassignedReferenceException)
+        catch (Exception)
         {
             // Provided audio clip is 'null' (Unity AudioClips do not compare to null normally)
             return;
