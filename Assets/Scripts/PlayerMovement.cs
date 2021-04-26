@@ -72,25 +72,37 @@ public class PlayerMovement : MonoBehaviour {
         HandleDirectionalInput();       
     }
 
-    private Vector3 _lastMousePos;
+    private Vector3 _lastMouseScreenPos;
+    private string _lookMode = "unknown";
 
     private void LookAtMouse() {
         float xCameraLookJoystick = Input.GetAxis("Roll");
         float yCameraLookJoystick = Input.GetAxis("Pitch");
 
         Vector2 cameraLookFromJoystick = new Vector2(xCameraLookJoystick, yCameraLookJoystick);
-        Vector3 mousePosition = _camera.ScreenToWorldPoint((Vector2) Input.mousePosition);
-        Vector2 cameraLookFromMouse = ((Vector2) (mousePosition - transform.position)).normalized;
-        Vector2 lookDirection = Vector2.zero;
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        Vector2 cameraLookFromMouse = ((Vector2) (_camera.ScreenToWorldPoint(mouseScreenPosition) - transform.position)).normalized;
         if (cameraLookFromJoystick.magnitude > 0f)
         {
-            lookDirection = cameraLookFromJoystick;
+            _lookMode = "joystick";
         }
-        else if (_lastMousePos != mousePosition)
+        else if (_lastMouseScreenPos != mouseScreenPosition)
         {
-            _lastMousePos = mousePosition;
-            lookDirection = cameraLookFromMouse;
+            _lookMode = "mouse";
         }
+
+        Vector2 lookDirection;
+        switch (_lookMode)
+        {
+            case "joystick":
+                lookDirection = cameraLookFromJoystick;
+                break;
+            case "mouse":
+            default:
+                lookDirection = cameraLookFromMouse;
+                break;
+        }
+        _lastMouseScreenPos = mouseScreenPosition;
 
         if (lookDirection.magnitude > 0f)
         {
