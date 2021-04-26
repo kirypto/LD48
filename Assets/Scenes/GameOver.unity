@@ -356,7 +356,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FACE YOUR FEARS
+  m_Text: TRY AGAIN ?
 --- !u!222 &1195226419
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a810f898b42ba34694af995cd92febf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetScene: Arena
+  _targetScene: StartMenu
 --- !u!4 &1416229077
 Transform:
   m_ObjectHideFlags: 0
@@ -668,8 +668,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9339623, g: 0.24145177, b: 0.14538093, a: 1}
-    m_HighlightedColor: {r: 0.401, g: 0.10446217, b: 0.06234032, a: 1}
+    m_NormalColor: {r: 0.40000004, g: 0.10588236, b: 0.0627451, a: 1}
+    m_HighlightedColor: {r: 0.9339623, g: 0.24145177, b: 0.14538093, a: 1}
     m_PressedColor: {r: 0.26115066, g: 0.20784314, b: 0.3137255, a: 1}
     m_SelectedColor: {r: 0.6214215, g: 0.145098, b: 0.93333334, a: 1}
     m_DisabledColor: {r: 0.3137255, g: 0.21960786, b: 0.20784315, a: 0.5019608}
