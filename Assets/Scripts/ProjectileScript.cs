@@ -12,6 +12,7 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private AudioClip soundDamage;
     [SerializeField] private AudioClip soundWall;
     [SerializeField] private AudioClip soundReflection;
+    [SerializeField] private bool canBeDeflected = true;
 
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;
@@ -89,7 +90,7 @@ public class ProjectileScript : MonoBehaviour
                 Destroy(gameObject);
                 AudioClipPlayer.PlayAudioAtLocation(soundDamage, _transform.position);
                 break;
-            case "Mirror":
+            case "Mirror" when canBeDeflected:
                 Transform mirrorTransform = other.transform;
                 if (IsProjectileCollidingWithFrontOfMirror(mirrorTransform, _transform.position))
                 {
@@ -100,10 +101,6 @@ public class ProjectileScript : MonoBehaviour
                     DelayCollisions();
                     AudioClipPlayer.PlayAudioAtLocation(soundReflection, _transform.position, 0.5f);
                 }
-
-                break;
-            default:
-                Debug.LogWarning($"Projectile interaction triggered with unhandled object, tag was: {otherColliderTag}");
                 break;
         }
     }
