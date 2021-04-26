@@ -337,6 +337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74089e8f6fa961c46a743cb2637b8ca3, type: 3}
+--- !u!1 &610472285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2683165964773961892, guid: 6a78b017c2192e24194944ed5da8eaf0, type: 3}
+  m_PrefabInstance: {fileID: 763163328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &676976788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6631323546938479685, guid: 74089e8f6fa961c46a743cb2637b8ca3, type: 3}
@@ -355,11 +360,11 @@ PrefabInstance:
       objectReference: {fileID: 676976788}
     - target: {fileID: 2683165964773961894, guid: 6a78b017c2192e24194944ed5da8eaf0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -12.31
       objectReference: {fileID: 0}
     - target: {fileID: 2683165964773961894, guid: 6a78b017c2192e24194944ed5da8eaf0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2683165965608722809, guid: 6a78b017c2192e24194944ed5da8eaf0, type: 3}
       propertyPath: m_CameraCutEvent.m_PersistentCalls.m_Calls.Array.size
@@ -561,7 +566,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771318, y: 1}
+    m_SensorSize: {x: 1.9035294, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -836,6 +841,51 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1523329640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1523329642}
+  - component: {fileID: 1523329641}
+  m_Layer: 0
+  m_Name: CameraManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1523329641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523329640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac82d8a1024a1f816ab233331aba90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 610472285}
+  bossCamera: {fileID: 984591526}
+--- !u!4 &1523329642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523329640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1920, y: 1080, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1634794219
 PrefabInstance:
   m_ObjectHideFlags: 0
