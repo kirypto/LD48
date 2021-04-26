@@ -509,14 +509,23 @@ MonoBehaviour:
     - attackPattern: 0
       delayInSeconds: 1
     - attackPattern: 1
-      delayInSeconds: 11
-    - attackPattern: 3
-      delayInSeconds: 2
+      delayInSeconds: 7
+  - attackPatterns:
+    - attackPattern: 2
+      delayInSeconds: 3
+    - attackPattern: 0
+      delayInSeconds: 6.3
   - attackPatterns:
     - attackPattern: 1
-      delayInSeconds: 3
-    - attackPattern: 3
       delayInSeconds: 15
+    - attackPattern: 3
+      delayInSeconds: 3
+  - attackPatterns:
+    - attackPattern: 2
+      delayInSeconds: 2
+  - attackPatterns:
+    - attackPattern: 3
+      delayInSeconds: 3
 --- !u!114 &4780092257719826565
 MonoBehaviour:
   m_ObjectHideFlags: 0
