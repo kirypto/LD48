@@ -565,11 +565,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthWaves:
-  - 15
-  - 30
-  - 45
-  - 60
-  - 100
+  - 5
+  - 11
+  - 20
+  - 31
+  - 42
 --- !u!58 &2451327282049740528
 CircleCollider2D:
   m_ObjectHideFlags: 0
