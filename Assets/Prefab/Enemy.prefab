@@ -520,11 +520,13 @@ MonoBehaviour:
       delayInSeconds: 15
     - attackPattern: 3
       delayInSeconds: 3
+    - attackPattern: 3
+      delayInSeconds: 22
   - attackPatterns:
     - attackPattern: 2
       delayInSeconds: 2
   - attackPatterns:
-    - attackPattern: 3
+    - attackPattern: 4
       delayInSeconds: 3
 --- !u!114 &4780092257719826565
 MonoBehaviour:
@@ -561,11 +563,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthWaves:
-  - 10
   - 15
-  - 25
-  - 42
-  - 50
+  - 30
+  - 45
+  - 60
+  - 100
 --- !u!58 &2451327282049740528
 CircleCollider2D:
   m_ObjectHideFlags: 0
