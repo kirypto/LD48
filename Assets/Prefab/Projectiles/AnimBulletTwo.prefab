@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2636423451564488326}
   - component: {fileID: 663303463364233262}
   - component: {fileID: 5166895659067615439}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: AnimBulletTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1425256087
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fa140e820d03fae4eb6e5718895a9b10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
