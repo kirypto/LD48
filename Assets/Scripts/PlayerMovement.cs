@@ -12,10 +12,12 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private AudioClip deathClip;
 
     private Rigidbody2D _rigidbody;
+    private IHealthSystem _playerHealth;
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
-        GetComponent<IHealthSystem>().OnWaveDeath += playerHealth =>
+        _playerHealth = GetComponent<IHealthSystem>();
+        _playerHealth.OnWaveDeath += playerHealth =>
         {
             AudioClipPlayer.PlayAudioAtLocation(deathClip, transform.position);
             if (playerHealth.IsPermaDead)
@@ -51,6 +53,14 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update() {
         LookAtMouse();
+        if (Input.GetKey(KeyCode.Backslash))
+        {
+            float lostHealth = _playerHealth.HealthMax - _playerHealth.Health;
+            if (lostHealth > 0f)
+            {
+                _playerHealth.DealDamage(-lostHealth);
+            }
+        }
     }
 
     private void FixedUpdate() {
