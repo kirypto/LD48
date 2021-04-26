@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private Vector3 _lastMouseScreenPos;
-    private string _lookMode = "unknown";
+    private bool _lookModeIsJoystick = false;
 
     private void LookAtMouse() {
         float xCameraLookJoystick = Input.GetAxis("Roll");
@@ -84,29 +84,21 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 cameraLookFromMouse = ((Vector2) (_camera.ScreenToWorldPoint(mouseScreenPosition) - transform.position)).normalized;
         if (cameraLookFromJoystick.magnitude > 0f)
         {
-            _lookMode = "joystick";
+            _lookModeIsJoystick = true;
         }
         else if (_lastMouseScreenPos != mouseScreenPosition)
         {
-            _lookMode = "mouse";
-        }
-
-        Vector2 lookDirection;
-        switch (_lookMode)
-        {
-            case "joystick":
-                lookDirection = cameraLookFromJoystick;
-                break;
-            case "mouse":
-            default:
-                lookDirection = cameraLookFromMouse;
-                break;
+            _lookModeIsJoystick = false;
         }
         _lastMouseScreenPos = mouseScreenPosition;
 
+
+        Vector2 lookDirection = _lookModeIsJoystick ? cameraLookFromJoystick : cameraLookFromMouse;
         if (lookDirection.magnitude > 0f)
         {
-            transform.right = lookDirection.normalized;
+            Vector2 lookDirectionNorm = lookDirection.normalized;
+            float angle = Mathf.Atan2(lookDirectionNorm.y,lookDirectionNorm.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 
