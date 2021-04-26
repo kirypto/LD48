@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour {
         SceneManager.LoadScene("GameOver");
     }
 
-    private void Update() {       
+    private void Update() {
         LookAtMouse();
         if (Input.GetKey(KeyCode.Backslash))
         {
@@ -78,39 +78,15 @@ public class PlayerMovement : MonoBehaviour {
         transform.right = vectorToMouse;
     }
 
-    private void HandleDirectionalInput() {       
-        if (UpHeld()) {
-            _rigidbody.AddForce(Vector2.up * _movementForce);
+    private void HandleDirectionalInput()
+    {
+        float xMovement = Mathf.Clamp(Input.GetAxis("Horizontal") + Input.GetAxis("Horizontal2"), -1f, 1f);
+        float yMovement = Mathf.Clamp(Input.GetAxis("Vertical") + Input.GetAxis("Vertical2"), -1f, 1f);
+
+        Vector2 movementVector = new Vector2(xMovement, yMovement);
+        if (movementVector.magnitude > 0f)
+        {
+            _rigidbody.AddForce(movementVector * _movementForce);
         }
-
-        if (LeftHeld()) {
-            _rigidbody.AddForce(Vector2.left * _movementForce);
-        }
-
-        if (DownHeld()) {
-            _rigidbody.AddForce(Vector2.down * _movementForce);
-        }
-
-        if (RightHeld()) {
-            _rigidbody.AddForce(Vector2.right * _movementForce);
-        }
-    }
-
-    private static bool UpHeld() {
-        float upaxis = Input.GetAxis("Vertical2");
-        print("up axis: " + upaxis);
-        return Input.GetKey(KeyCode.W) || upaxis > 0.5f;
-    }
-
-    private static bool LeftHeld() {
-        return Input.GetKey(KeyCode.A);
-    }
-
-    private static bool DownHeld() {
-        return Input.GetKey(KeyCode.S);
-    }
-
-    private static bool RightHeld() {
-        return Input.GetKey(KeyCode.D);
     }
 }
