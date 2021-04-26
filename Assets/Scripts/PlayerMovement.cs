@@ -40,7 +40,11 @@ public class PlayerMovement : MonoBehaviour {
         Time.timeScale = 0.1f;
         yield return new WaitForSecondsRealtime(0.35f);
         Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(0.5f);
+        for (float alpha = 0; alpha <= 1; alpha += 0.02f)
+        {
+            yield return new WaitForSecondsRealtime(0.05f);
+            MainUIScript.SetBlackoutAlpha(alpha);
+        }
         StopCoroutine(nameof(SlowAndDeath));
         SceneManager.LoadScene("GameOver");
     }
