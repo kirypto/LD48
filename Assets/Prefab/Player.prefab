@@ -270,6 +270,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthWaves:
   - 15
+  gameObjectsWithRenderersToFlashOnHit:
+  - {fileID: 88998734}
 --- !u!50 &3696233323864084151
 Rigidbody2D:
   serializedVersion: 4

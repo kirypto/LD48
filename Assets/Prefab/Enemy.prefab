@@ -570,6 +570,13 @@ MonoBehaviour:
   - 20
   - 31
   - 42
+  gameObjectsWithRenderersToFlashOnHit:
+  - {fileID: 3019246765957241505}
+  - {fileID: 2216674592983214532}
+  - {fileID: 3598988440154968889}
+  - {fileID: 8001118114892955142}
+  - {fileID: 37271538635968082}
+  - {fileID: 1452899125995133974}
 --- !u!58 &2451327282049740528
 CircleCollider2D:
   m_ObjectHideFlags: 0
