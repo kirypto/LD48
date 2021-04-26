@@ -72,7 +72,7 @@ public class EnemyScript : MonoBehaviour
         Time.timeScale = 0;
 
 
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(1.5f);
         print("Resuming time");
         Time.timeScale = 1f;
         ScheduleCurrentWaveAttackPatterns();
