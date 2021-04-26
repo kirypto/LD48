@@ -1,6 +1,9 @@
+using System.Collections;
 using Health;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(IHealthSystem))]
 public class PlayerMovement : MonoBehaviour {
     [SerializeField]
     private float _movementForce = 1f;
@@ -12,7 +15,34 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
-        GetComponent<IHealthSystem>().OnWaveDeath += _ => AudioClipPlayer.PlayAudioAtLocation(deathClip, transform.position);
+        GetComponent<IHealthSystem>().OnWaveDeath += playerHealth =>
+        {
+            AudioClipPlayer.PlayAudioAtLocation(deathClip, transform.position);
+            if (playerHealth.IsPermaDead)
+            {
+                StartCoroutine(nameof(SlowAndDeath));
+            }
+        };
+    }
+
+    private IEnumerator SlowAndDeath()
+    {
+        Time.timeScale = 0.75f;
+        yield return new WaitForSecondsRealtime(0.15f);
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(0.15f);
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(0.15f);
+        Time.timeScale = 0.35f;
+        yield return new WaitForSecondsRealtime(0.25f);
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(0.25f);
+        Time.timeScale = 0.1f;
+        yield return new WaitForSecondsRealtime(0.35f);
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(0.5f);
+        StopCoroutine(nameof(SlowAndDeath));
+        SceneManager.LoadScene("GameOver");
     }
 
     private void Update() {
