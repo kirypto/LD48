@@ -550,6 +550,8 @@ MonoBehaviour:
     prefab: {fileID: 1984692809892057313, guid: bd3f8298eba8b324abae09fa864f6932, type: 3}
   - projectileType: 3
     prefab: {fileID: 1984692809892057313, guid: f46141bf66f4de04ba17fd14949c97a8, type: 3}
+  - projectileType: 4
+    prefab: {fileID: 1984692809892057313, guid: 46fbb0f8312dd7242bda14cffc82e755, type: 3}
 --- !u!114 &3500874457995269462
 MonoBehaviour:
   m_ObjectHideFlags: 0

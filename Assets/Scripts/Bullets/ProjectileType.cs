@@ -6,5 +6,6 @@
         WazerBeam,
         FireBall,
         OrbNotReflectable,
+        OrbReflectable,
     }
 }
