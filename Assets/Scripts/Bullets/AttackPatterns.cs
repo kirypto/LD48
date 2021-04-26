@@ -486,7 +486,7 @@ namespace Bullets
                                 new AttackStep(new List<ProjectileAttack> {new ProjectileAttack(FromDegree(356), ProjectileType.OrbNotReflectable)}, 0.1f),
                                 new AttackStep(new List<ProjectileAttack> {new ProjectileAttack(FromDegree(357), ProjectileType.OrbNotReflectable)}, 0.1f),
                                 new AttackStep(new List<ProjectileAttack> {new ProjectileAttack(FromDegree(358), ProjectileType.OrbNotReflectable)}, 0.1f),
-                                new AttackStep(new List<ProjectileAttack> {new ProjectileAttack(FromDegree(359), ProjectileType.OrbNotReflectable)}, 27f),
+                                new AttackStep(new List<ProjectileAttack> {new ProjectileAttack(FromDegree(359), ProjectileType.OrbNotReflectable)}, 37f),
                         }
                 },
 

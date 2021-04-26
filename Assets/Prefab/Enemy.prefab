@@ -520,13 +520,13 @@ MonoBehaviour:
       delayInSeconds: 15
     - attackPattern: 3
       delayInSeconds: 3
-    - attackPattern: 3
-      delayInSeconds: 22
-  - attackPatterns:
     - attackPattern: 2
-      delayInSeconds: 2
+      delayInSeconds: 7
   - attackPatterns:
     - attackPattern: 4
+      delayInSeconds: 2
+  - attackPatterns:
+    - attackPattern: 3
       delayInSeconds: 3
 --- !u!114 &4780092257719826565
 MonoBehaviour:
